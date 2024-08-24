@@ -12,6 +12,7 @@ env:
   INSTALL_DIR: ${{ github.workspace }}/v4l-utils-install
   KEYTABLE_USER_DIR: ${{ github.workspace }}/v4l-utils-install/etc/rc_keymaps
   KEYTABLE_SYSTEM_DIR: ${{ github.workspace }}/v4l-utils-install/etc/rc_keymaps
+  UDEV_RULES_DIR: ${{ github.workspace }}/v4l-utils-install/lib/udev/rules.d
 
 jobs:
   build-v4l-utils:
@@ -63,7 +64,8 @@ jobs:
       run: |
         make install \
         keytableuserdir=${{ env.KEYTABLE_USER_DIR }} \
-        keytablesystemdir=${{ env.KEYTABLE_SYSTEM_DIR }}
+        keytablesystemdir=${{ env.KEYTABLE_SYSTEM_DIR }} \
+        udevrulesdir=${{ env.UDEV_RULES_DIR }}
 
     - name: List installed files
       run: find ${{github.workspace}}/v4l-utils-install
