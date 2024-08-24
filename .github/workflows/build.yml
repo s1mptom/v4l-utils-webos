@@ -58,11 +58,14 @@ jobs:
 
     - name: Build v4l-utils
       working-directory: ${{github.workspace}}/build
-      run: make
+      run: |
+        source ${TOOLCHAIN_DIR}/environment-setup
+        make
 
     - name: Install v4l-utils
       working-directory: ${{github.workspace}}/build
       run: |
+        source ${TOOLCHAIN_DIR}/environment-setup
         make install \
         keytableuserdir=${{ env.KEYTABLE_USER_DIR }} \
         keytablesystemdir=${{ env.KEYTABLE_SYSTEM_DIR }} \
