@@ -40,6 +40,11 @@ jobs:
       run: |
         ./relocate-sdk.sh
 
+    - name: Source environment setup
+      working-directory: ${{ env.TOOLCHAIN_DIR }}
+      run: |
+        source ./environment-setup
+
     - name: CMake Version
       run: cmake --version
 
@@ -53,7 +58,7 @@ jobs:
         ../configure \
         --host=aarch64-webos-linux-gnueabi \
         --prefix=${{ github.workspace }}/v4l-utils-install \
-        --with-sysroot=${{ env.TOOLCHAIN_DIR }}/arm-webos-linux-gnueabi/sysroot
+        --with-sysroot=${{ env.TOOLCHAIN_DIR }}/aarch64-webos-linux-gnueabi/sysroot
 
     - name: Build v4l-utils
       working-directory: ${{github.workspace}}/build
