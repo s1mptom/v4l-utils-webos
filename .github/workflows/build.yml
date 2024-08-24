@@ -45,6 +45,12 @@ jobs:
         source ${TOOLCHAIN_DIR}/environment-setup
         echo "Using compiler: $CC"
 
+    - name: Check Environment Variables
+      run: |
+        echo "CC: $CC"
+        echo "CXX: $CXX"
+        echo "PATH: $PATH"
+
     - name: CMake Version
       run: cmake --version
 
