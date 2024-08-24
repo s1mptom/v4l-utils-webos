@@ -40,10 +40,10 @@ jobs:
       run: |
         ./relocate-sdk.sh
 
-    - name: Source environment setup
-      working-directory: ${{ env.TOOLCHAIN_DIR }}
+    - name: Set up environment
       run: |
-        source ./environment-setup
+        source ${TOOLCHAIN_DIR}/environment-setup
+        echo "Using compiler: $CC"
 
     - name: CMake Version
       run: cmake --version
