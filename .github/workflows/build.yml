@@ -51,7 +51,7 @@ jobs:
       shell: bash
       run: |
         ../configure \
-        --host=arm-webos-linux-gnueabi \
+        --host=aarch64-webos-linux-gnueabi \
         --prefix=${{ github.workspace }}/v4l-utils-install \
         --with-sysroot=${{ env.TOOLCHAIN_DIR }}/arm-webos-linux-gnueabi/sysroot
 
