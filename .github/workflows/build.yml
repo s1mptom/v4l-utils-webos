@@ -10,7 +10,8 @@ env:
   TOOLCHAIN_DIR: /opt/arm-webos-linux-gnueabi_sdk-buildroot
   TOOLCHAIN_FILE: /opt/arm-webos-linux-gnueabi_sdk-buildroot/share/buildroot/toolchainfile.cmake
   INSTALL_DIR: ${{ github.workspace }}/v4l-utils-install
-  KEYTABLE_DIR: ${{ github.workspace }}/v4l-utils-install/etc/rc_keymaps
+  KEYTABLE_USER_DIR: ${{ github.workspace }}/v4l-utils-install/etc/rc_keymaps
+  KEYTABLE_SYSTEM_DIR: ${{ github.workspace }}/v4l-utils-install/etc/rc_keymaps
 
 jobs:
   build-v4l-utils:
@@ -42,40 +43,37 @@ jobs:
       run: cmake --version
 
     - name: Create Build directory
-      run: cmake -E make_directory ${{ github.workspace }}/build
+      run: cmake -E make_directory ${{github.workspace}}/build
 
     - name: Configure v4l-utils
-      working-directory: ${{ github.workspace }}/build
+      working-directory: ${{github.workspace}}/build
       shell: bash
       run: |
         ../configure \
         --host=arm-webos-linux-gnueabi \
-        --prefix=${{ env.INSTALL_DIR }} \
-        --with-sysroot=${{ env.TOOLCHAIN_DIR }}/arm-webos-linux-gnueabi/sysroot \
-        --keytableuserdir=${{ env.KEYTABLE_DIR }} \
-        --keytablesystemdir=${{ env.KEYTABLE_DIR }}
+        --prefix=${{ github.workspace }}/v4l-utils-install \
+        --with-sysroot=${{ env.TOOLCHAIN_DIR }}/arm-webos-linux-gnueabi/sysroot
 
     - name: Build v4l-utils
-      working-directory: ${{ github.workspace }}/build
+      working-directory: ${{github.workspace}}/build
       run: make
 
-    - name: Create install directories
-      run: |
-        mkdir -p ${{ env.INSTALL_DIR }}/bin
-        mkdir -p ${{ env.KEYTABLE_DIR }}
-
     - name: Install v4l-utils
-      working-directory: ${{ github.workspace }}/build
-      run: make install
+      working-directory: ${{github.workspace}}/build
+      run: |
+        make install \
+        keytableuserdir=${{ env.KEYTABLE_USER_DIR }} \
+        keytablesystemdir=${{ env.KEYTABLE_SYSTEM_DIR }}
 
     - name: List installed files
-      run: find ${{ env.INSTALL_DIR }}
+      run: find ${{github.workspace}}/v4l-utils-install
 
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: v4l-utils_${{ matrix.build-type }}
-        path: ${{ env.INSTALL_DIR }}
+        path: |
+          ${{github.workspace}}/v4l-utils-install
 
     - uses: DoozyX/clang-format-lint-action@v0.14
       with:
@@ -88,4 +86,4 @@ jobs:
       if: ${{ startsWith(github.ref, 'refs/tags/') && matrix.build-type == 'Release' }}
       with:
         files: |
-          ${{ env.INSTALL_DIR }}/bin/*
+          ${{github.workspace}}/v4l-utils-install/bin/*
