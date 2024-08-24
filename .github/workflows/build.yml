@@ -77,9 +77,10 @@ jobs:
         path: |
           ${{github.workspace}}/v4l-utils-install
 
-    - uses: DoozyX/clang-format-lint-action@v0.14
+    - name: Lint with Clang-Format
+      uses: DoozyX/clang-format-lint-action@v0.14
       with:
-        source: './src'
+        source: '.'
         extensions: 'c,h,cpp'
         clangFormatVersion: 14
 
