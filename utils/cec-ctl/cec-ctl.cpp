@@ -14,6 +14,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+#include <ctime>
+#include <time.h>
 
 #include <unistd.h>
 #include <stdlib.h>
