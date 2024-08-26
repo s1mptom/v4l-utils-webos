@@ -19,6 +19,8 @@
 # Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335  USA
  */
 
+#undef _LARGEFILE_SOURCE
+#undef _FILE_OFFSET_BITS
 #define _LARGEFILE64_SOURCE 1
 
 #include <config.h>
