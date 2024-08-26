@@ -20,6 +20,9 @@
 #ifndef _CEC_COMPLIANCE_H_
 #define _CEC_COMPLIANCE_H_
 
+#include <ctime>
+#include <time.h>
+
 #include <stdarg.h>
 #include <cerrno>
 #include <string>
