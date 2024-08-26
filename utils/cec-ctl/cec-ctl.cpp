@@ -14,8 +14,6 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-#define _POSIX_C_SOURCE 200809L
-#include <time.h>
 
 #include <unistd.h>
 #include <stdlib.h>

@@ -57,8 +57,8 @@ jobs:
       shell: bash
       run: |
         source ${TOOLCHAIN_DIR}/environment-setup
-        # export CFLAGS="-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
-        # export CXXFLAGS="-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"
+        export CFLAGS="-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_POSIX_C_SOURCE=200809L"
+        export CXXFLAGS="-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -D_POSIX_C_SOURCE=200809L"
         ../configure \
         --host=arm-webos-linux-gnueabi \
         --prefix=${{ github.workspace }}/v4l-utils-install \
