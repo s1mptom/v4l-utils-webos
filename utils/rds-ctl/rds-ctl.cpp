@@ -20,6 +20,9 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335  USA
  */
 
+#include <ctime>
+#include <time.h>
+
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
